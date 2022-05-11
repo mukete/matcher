@@ -8,7 +8,7 @@ Route::get('/match/{propertyId}', function (Request $request, $propertyId) {
 
     // return log(3 - 0, 2);
 
-    $d = array();
+    $data = array();
     // getting property with propertyId
     $property = \App\Models\Property::find($propertyId);
     // hold property fields for checking
@@ -25,8 +25,8 @@ Route::get('/match/{propertyId}', function (Request $request, $propertyId) {
 
         // hold current profile data 
         $tempArray = array(
-            'score' => 0,
             'searchProfileId' => $selected->id,
+            'score' => 0,
             'strictMatchesCount' => 0,
             'looseMatchesCount' => 0,
         );
@@ -54,9 +54,11 @@ Route::get('/match/{propertyId}', function (Request $request, $propertyId) {
             }
         }
         // return $aa;
-        array_push($d, $tempArray);
+        array_push($data, $tempArray);
     }
     
-    return ['data' => $d];
+    $score = array_column($data, 'score');
+    array_multisort($score, SORT_DESC, $data);
+    return ['data' => $data];
 
 });
