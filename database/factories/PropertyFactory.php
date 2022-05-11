@@ -15,9 +15,9 @@ class PropertyFactory extends Factory
     {
         return [
             //
-            'name' => $faker->text,
-            'address' => $faker->address,
-            'propertyType' => $faker->uuid,
+            'name' => $this->faker->text,
+            'address' => $this->faker->address,
+            'propertyType' => $this->faker->uuid,
             // 'fields' => array()
         ];
     }

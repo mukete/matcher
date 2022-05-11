@@ -15,8 +15,8 @@ class SearchProfileFactory extends Factory
     {
         return [
             //
-            'name' => $faker->text,
-            'propertyType' => $faker->uuid,
+            'name' => $this->faker->text,
+            'propertyType' => $this->faker->uuid,
             // 'fields' => array()
         ];
     }
