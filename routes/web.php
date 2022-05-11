@@ -2,16 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function () {
     //  randomly set all propperty types to match at least one search profile
@@ -22,7 +12,6 @@ Route::get('/', function () {
                 ->inRandomOrder()
                 ->first()->propertyType;
                 // $searchProfile->save();
-
     }
 
     $heating = array('gas', 'electric', 'coal','hydronic');
@@ -57,9 +46,5 @@ Route::get('/', function () {
         );
         // $searchProfile->save();
     }
-
     return 'matchr';
-
-    return 'swapping done';
-    return view('welcome');
 });

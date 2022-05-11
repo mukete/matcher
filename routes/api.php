@@ -3,16 +3,6 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
 
 Route::get('/match/{propertyId}', function (Request $request, $propertyId) {
 
@@ -35,8 +25,8 @@ Route::get('/match/{propertyId}', function (Request $request, $propertyId) {
 
         // hold current profile data 
         $tempArray = array(
+            'score' => 0,
             'searchProfileId' => $selected->id,
-            'score' => 0 ,
             'strictMatchesCount' => 0,
             'looseMatchesCount' => 0,
         );
@@ -47,24 +37,26 @@ Route::get('/match/{propertyId}', function (Request $request, $propertyId) {
                 // Set strick match
                 if(($value >= $selectedFields[$key][0]) && ($value <= $selectedFields[$key][1]) ) {
                     $tempArray['strictMatchesCount'] = $tempArray['strictMatchesCount']+1;
+                    $tempArray['score'] = $tempArray['score']+3;
                 } else {
                     // set loose matches
                     if(($value >= ($selectedFields[$key][0] - ((5/100)*$selectedFields[$key][0]))) && ($value <= ($selectedFields[$key][1] + ((5/100)*$selectedFields[$key][1]))) ) {
                         $tempArray['looseMatchesCount'] = $tempArray['looseMatchesCount']+1;
+                        $tempArray['score'] = $tempArray['score']+1;
                     }
                 }
             } else {
                 // check for non array fields
                 if($value == @$selectedFields[$key] ) {
                     $tempArray['strictMatchesCount'] = $tempArray['strictMatchesCount']+1;
+                    $tempArray['score'] = $tempArray['score']+3;
                 }
             }
         }
         // return $aa;
         array_push($d, $tempArray);
     }
-return $d;
-
-return $searchProfileWithPropertyType;
+    
+    return ['data' => $d];
 
 });
