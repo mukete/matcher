@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/match/{propertyId}', function (Request $request, $propertyId) {
 
-    // return log(3 - 0, 2);
 
     $data = array();
     // getting property with propertyId
@@ -53,7 +52,6 @@ Route::get('/match/{propertyId}', function (Request $request, $propertyId) {
                 }
             }
         }
-        // return $aa;
         array_push($data, $tempArray);
     }
     
