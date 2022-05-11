@@ -18,7 +18,7 @@ class CreatePropertiesTable extends Migration
             $table->string('name');
             $table->string('address');
             $table->uuid('propertyType');
-            $table->json('fields');
+            $table->text('fields');
             $table->timestamps();
         });
     }
